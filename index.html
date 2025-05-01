@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Growing Up Together: HDB & SG (1965–2025)</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+
+  <style>
+    /* reset & base */
+    * { box-sizing: border-box; margin:0; padding:0; }
+    body {
+      font-family: "Helvetica Neue", Arial, sans-serif;
+      color: #333;
+      overflow-x: hidden;
+    }
+
+    /* CARTO embed background */
+    #carto-map {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      z-index: 0;
+    }
+    #carto-map iframe {
+      width: 100%; height: 100%;
+      border: none;
+    }
+
+    /* INTRO SCREEN */
+    .intro {
+      position: relative;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: #fff;
+      z-index: 2;
+    }
+    .intro img { max-width: 200px; margin-bottom: 1rem; }
+    .intro h1 { font-size: 2.5rem; color: #ed1b3b; }
+    .intro h2 { font-size: 1.5rem; margin: 0.5rem 0 0.25rem; color: #ed1b3b; }
+
+    .intro-text {
+      max-width: 1200px;
+      margin-top: 4em;
+      margin-bottom: 0em;
+      text-align: center;
+      font-size: 1rem;
+      line-height: 1.5;
+      color: #333;
+    }
+    .intro-text p {
+      margin-bottom: 1rem;
+    }
+    
+    /* content segments */
+    .segment { position: relative; height: 150vh; z-index: 1; }
+    .mask {
+      display: none;
+    }
+    .titles {
+      position: absolute;
+      top: 25%; left: 50%;
+      transform: translateX(-50%);
+      text-align: center;
+      z-index: 2;
+      opacity: 1;
+      background: rgba(255, 255, 255, 0.85);
+      padding: 1rem 2rem;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+    .titles h1 { 
+        font-size:2rem; 
+        margin-bottom:0.5rem; 
+        color:#ed1b3b; 
+    }
+    .titles h2 { 
+        font-size:1.25rem; 
+        color:#333;
+    }
+    .image { 
+        position:absolute; 
+        top:50%; right:10%; width:50%; opacity:0; 
+        transform:translateY(-50%) scale(0.8); 
+        z-index:3;
+    }
+    .image img { 
+        width:100%; 
+        border-radius:8px; 
+        box-shadow:0 4px 12px rgba(0,0,0,0.15); 
+    }
+    .placeholder { 
+        position:absolute; 
+        top:50%; left:10%; 
+        width:25%; 
+        height:600px; 
+        background:#fff; opacity:0; 
+        transform:translateY(-50%) translateX(-20px); 
+        padding:1rem; 
+        border-radius:8px; 
+        box-shadow:0 4px 12px rgba(0,0,0,0.1); 
+        z-index:3; 
+        font-size:1rem; 
+        line-height:1.4; 
+    }
+    .placeholder h1 { 
+        font-size:1.25rem; 
+        color:#333;
+        margin-bottom:1rem; 
+    }
+    .placeholder p { 
+        margin-bottom:1rem; 
+    }
+
+    /* Image Tiles */
+    .four-images {
+      position: absolute;
+      top: 60%; width: 90%;
+      display: flex; justify-content: space-between;
+      z-index: 3;
+    }
+    .four-images .image-box {
+      width: 23%; background: #fff; border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      text-align: center; padding: 1rem;
+    }
+    .four-images .image-box img {
+      width: 100%; aspect-ratio: 1; object-fit: cover;
+      border-radius: 4px; margin-bottom: 0.5rem;
+    }
+    .four-images .image-box h3 {
+      font-size: 1.25rem; margin: 0.5rem 0 1rem; color: #ed1b3b;
+    }
+    .four-images .image-box p {
+      font-size: .9rem; color: #333;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Background CARTO map embed -->
+  <div id="carto-map">
+    <iframe
+      src="https://thunbergii.app.carto.com/viewer/61bc62e6-6241-460e-bd48-d3db8b6542f0"
+      allowfullscreen>
+    </iframe>
+  </div>
+
+  <!-- 1) Intro screen -->
+  <section class="intro">
+    <img src="https://cdn.vev.design/cdn-cgi/image/f=auto,q=82/private/nGnbl4cdA5VzycnaoK1Au4EDT013/image/CBTa4a-YcR_2issmk.jpg" alt="HDB & SG logo">
+    <h1>Singapore: Growing Up Together</h1>
+    <h2>HDB &amp; SG (1965–2025)</h2>
+
+    <div class="intro-text">
+      <p>Over the past six decades, Singapore’s Housing and Development Board (HDB) has transformed the nation’s urban and social fabric. From humble beginnings in the 1960s to today’s smart and sustainable townships, HDB has played a pivotal role in shaping how Singaporeans live, interact, and grow as a community. Each decade brought new priorities whether addressing housing shortages, fostering national identity, or embracing technological and demographic change.</p>
+      <p>As Singapore matured, so did the vision for public housing. HDB towns evolved from basic residential zones to vibrant, self-sufficient communities. These spaces now accommodate multiple generations, reflect diverse lifestyles, and serve as living testaments to the nation’s resilience, adaptability, and foresight in urban planning.</p>
+    </div>
+  </section>
+
+  <!-- 2) 1950s -->
+  <section class="segment" id="seg-1950s">
+    
+    <div class="titles">
+      <h1>Pre-HDB: The Singapore Improvement Trust</h1>
+      <h2>HDB’s Predecessor</h2>
+    </div>
+    <div class="image">
+      <img src="https://raw.githubusercontent.com/Prudhvinsk/SG-60/refs/heads/main/0.png" alt="0">
+    </div>
+
+    <div class="placeholder">
+      <h1>The Singapore Improvement Trust - HDB’s Predecessor</h1>
+      <p>Before the Housing and Development Board (HDB) came into existence, public housing in Singapore was overseen by the Singapore Improvement Trust (SIT). Established in July 1927 under the Singapore Improvement Ordinance, SIT was the colonial government's response to worsening housing shortages, overcrowding, and unsanitary living conditions in rapidly urbanising Singapore. It focused on urban renewal, slum clearance, and the construction of low-cost flats, particularly in central areas like Tiong Bahru.</p>
+      <p>SIT laid the foundational groundwork in urban planning and public housing design, setting the stage for the formation of HDB in 1960, a bold new chapter in Singapore’s housing journey that would redefine the city’s skyline and social landscape.</p>
+      <p>Source: HDB</p>
+    </div>
+  </section>
+
+  <!-- 3) 1960s -->
+  <section class="segment" id="seg-1960s">
+    
+    <div class="titles">
+      <h1>1960s: The First HDB Estates</h1>
+      <h2>From kampongs to concrete blocks</h2>
+    </div>
+    <div class="image">
+      <img src="https://raw.githubusercontent.com/Prudhvinsk/SG-60/refs/heads/main/1960.jpg" alt="1960">
+    </div>
+
+    <div class="placeholder">
+      <h1>1960s: The First HDB Estates - From kampongs to concrete blocks</h1>
+      <p>The 1960s marked a turning point in Singapore’s housing history. In response to post-war overcrowding and poor living conditions, the newly formed HDB launched its first wave of estates, replacing kampongs with high-rise flats. These early developments, such as Queenstown and Toa Payoh, offered basic but secure homes equipped with modern sanitation, electricity, and running water.</p>
+      <p>These early HDB blocks symbolized progress and hope. They provided the foundation for a unified national identity, encouraging diverse communities to live side by side in shared spaces. The shift from kampong living to high-rise flats marked not just a physical relocation, but a profound cultural transition that reshaped how Singaporeans perceived home and neighbourliness.</p>
+      <p>Tanglin Halt, Queenstown. Source: HDB</p>
+    </div>
+  </section>
+
+  <!-- 4) 1970s -->
+  <section class="segment" id="seg-1970s">
+    
+    <div class="titles">
+      <h1>1970s: Building a Nation</h1>
+      <h2>New Towns and community planning</h2>
+    </div>
+    <div class="image">
+      <img src="https://raw.githubusercontent.com/Prudhvinsk/SG-60/refs/heads/main/1970.jpg" alt="1970">
+    </div>
+
+    <div class="placeholder">
+      <h1>1970s: Building a Nation - New Towns and community planning</h1>
+      <p>As Singapore’s population grew rapidly, the 1970s saw the expansion of HDB’s vision beyond housing. Entire new towns such as Ang Mo Kio and Bedok were designed with schools, markets, clinics, and parks, creating self-contained communities where residents could live, work, and play. The emphasis shifted toward planning for everyday life, not just shelter.</p> 
+      <p>This integrated town model laid the groundwork for a cohesive national development strategy. Community facilities and social cohesion became central, fostering a sense of belonging and identity among Singaporeans. The town became a microcosm of the nation, a carefully planned ecosystem reflecting shared values and aspirations.</p>
+      <p> Source: HDB</p>
+    </div>
+  </section>
+
+  <!-- 5) 1980s -->
+  <section class="segment" id="seg-1980s">
+    
+    <div class="titles">
+      <h1>1980s: Planning Quality Living Environments</h1>
+      <h2>Community at the Core</h2>
+    </div>
+    <div class="image">
+      <img src="https://raw.githubusercontent.com/Prudhvinsk/SG-60/refs/heads/main/1980.jpg" alt="1980">
+    </div>
+
+    <div class="placeholder">
+      <h1>1980s: Planning Quality Living Environments - Community at Core</h1>
+      <p>The 1980s was a transformative period for town planning in Singapore, as HDB introduced a new structural model that enhanced the quality of living environments. This era saw the formalization of the precinct concept, a planning unit of 7 to 8 housing blocks with approximately 600–800 flats. This model brought housing closer to the scale of communities, fostering neighbourly ties and a stronger sense of belonging among residents.</p>
+      <p>To complement this planning approach, each precinct was thoughtfully designed with a suite of recreational and communal amenities. These features promoted healthier lifestyles, encouraged spontaneous interaction, and strengthened the social fabric within HDB towns, ushering in a new vision of public housing where well-being and community-building were as important as the homes themselves.</p>
+      <p>Bishan Town. Source: HDB</p>
+    </div>
+  </section>
+
+  <!-- 6) 1990s -->
+  <section class="segment" id="seg-1990s">
+    
+    <div class="titles">
+      <h1>1990s: Executive & Mixed-Use</h1>
+      <h2>Decentralisation and diversity</h2>
+    </div>
+    <div class="image">
+      <img src="https://raw.githubusercontent.com/Prudhvinsk/SG-60/refs/heads/main/1990.jpg" alt="1990">
+    </div>
+
+    <div class="placeholder">
+      <h1>1990s: Executive & Mixed-Use - Decentralisation and diversity</h1>
+      <p>The 1990s introduced greater variety and flexibility in public housing. Executive condominiums and premium flats catered to the rising middle class, while mixed-use developments combined residential, commercial, and civic functions within the same precincts. Towns like Tampines became regional centres, reducing pressure on the city core.</p>
+      <p>This era highlighted the growing sophistication of Singapore’s urban strategy. HDB housing adapted to different life stages and aspirations, creating a more inclusive and diversified living environment. It was a move toward decentralisation, promoting economic activity and job creation in suburban areas while enriching the social mix of communities.</p>
+      <p>Blocks at Tampines Street 45, Tampines Town. Source: HDB</p>
+    </div>
+  </section>
+
+  <!-- 7) 2000s -->
+  <section class="segment" id="seg-2000s">
+    
+    <div class="titles">
+      <h1>2000s: Innovating For The Future</h1>
+      <h2>Redefining Public Housing</h2>
+    </div>
+    <div class="image">
+      <img src="https://raw.githubusercontent.com/Prudhvinsk/SG-60/refs/heads/main/2000.png" alt="2000">
+    </div>
+
+    <div class="placeholder">
+      <h1>2000s: Innovating For The Future - Redefining Public Housing</h1>
+      <p>The 2000s marked a decade of bold experimentation and architectural ambition for HDB. Pushing the boundaries of conventional public housing, iconic projects like The Pinnacle@Duxton redefined the skyline with its 50-storey towers and multiple sky gardens, setting a new benchmark for vertical living.</p>
+      <p>Innovation extended beyond buildings to lifestyle and social inclusion. HDB introduced new housing typologies tailored to evolving family structures, such as flats for multi-generational households, and facilities like 3Gen playgrounds and rooftop gardens to encourage intergenerational bonding. These developments reflected a future-facing approach, where housing was not just about shelter, but about quality of life, environmental stewardship, and creating vibrant, inclusive neighbourhoods.</p>
+      <p>Pinnacle, Duxton. Source: HDB</p>
+    </div>
+  </section>
+
+  <!-- 8) 2010s -->
+  <section class="segment" id="seg-2010s">
+    
+    <div class="titles">
+      <h1>2010s: Smart & Green Towns</h1>
+      <h2>Technology and nature in harmony</h2>
+    </div>
+    <div class="image">
+      <img src="https://raw.githubusercontent.com/Prudhvinsk/SG-60/refs/heads/main/2010.jpg" alt="2010">
+    </div>
+
+    <div class="placeholder">
+      <h1>2010s: Smart & Green Towns - Technology and Nature in Harmony</h1>
+      <p>In the 2010s, sustainability and digital integration became core to HDB’s planning philosophy. Initiatives like the HDB Greenprint and Smart HDB Towns sought to reduce carbon footprint and enhance liveability through smart energy systems, eco-friendly design, and data-driven estate management. Towns like Yuhua and Tengah became testbeds for these new ideas.</p>
+      <p>Green and blue networks were woven into urban fabrics - green roofs, community gardens, and water-sensitive designs became commonplace. HDB estates now supported both environmental stewardship and social well-being, demonstrating how smart technologies and nature could coexist to enhance everyday life in densely populated urban settings.</p>
+      <p>Plantation District, Tengah. Source: HDB</p>
+    </div>
+  </section>
+
+  <!-- 9) 2020s -->
+  <section class="segment" id="seg-2020s">
+    
+    <div class="titles">
+      <h1>2020s: Ageing‑in‑Place & Beyond</h1>
+      <h2>The next chapter of community design</h2>
+    </div>
+    <div class="image">
+      <img src="https://raw.githubusercontent.com/Prudhvinsk/SG-60/refs/heads/main/2020.jpg" alt="2020">
+    </div>
+
+    <div class="placeholder">
+      <h1>2020s: Ageing-in-Place & Beyond - The Next Chapter of Community Design</h1>
+      <p>With Singapore’s population ageing rapidly, the 2020s focus on enabling seniors to live actively and independently within their communities. Universal design, senior-friendly upgrades, and intergenerational spaces are being incorporated into precincts. Programmes like the EASE (Enhancement for Active Seniors) and new typologies like Community Care Apartments reflect this shift.</p>
+      <p>Looking ahead, HDB’s role is evolving yet again, balancing the needs of a multigenerational society, climate adaptation, and digital inclusion. The emphasis is on creating inclusive, resilient communities where people of all ages can thrive. As Singapore turns 60, its housing story continues to be one of innovation, empathy, and shared futures.</p>
+      <p>Kampung Admirality. Source: WOHA</p>
+    </div>
+  </section>
+
+  <!-- 10) Town Planning Schemes -->
+  <section class="intro">
+      <h1>Town Planning Schemes</h1>
+
+  <div class="four-images">
+    <div class="image-box">
+      <img src="https://raw.githubusercontent.com/Prudhvinsk/SG-60/refs/heads/main/1.jpg" alt="1">
+      <h3>The Neighbourhood Concept</h3>
+      <p>A neighbourhood centre lies at the heart of every HDB town, and serves as the key commercial and activity hub.Smaller neighbourhoods of typically 4,000 to 6,000 residential units surround the town centre, with each having its own shops, schools, and integrated facilities. The neighbourhoods, in turn, comprise precincts of about 400 to 800 residential units, with shops and precinct facilities, such as 3-generational playgrounds, fitness corners, and community gardens.</p>
+    </div>
+    <div class="image-box">
+      <img src="https://raw.githubusercontent.com/Prudhvinsk/SG-60/refs/heads/main/2.jpg" alt="2">
+      <h3>Hierarchy of Facilities</h3>
+      <p>Facilities at the precinct, neighbourhood, and town levels complement one another. They are distributed based on a hierarchical concept that offers residents proximity to a variety of amenities. In the town centres are facilities catering to a wider range of needs, such as shopping malls, large supermarkets, departmental stores, and restaurants. Recreational and social facilities that serve a wider catchment of residents such as sports complexes, libraries and community clubs are at the town level.</p>
+    </div>
+    <div class="image-box">
+      <img src="https://raw.githubusercontent.com/Prudhvinsk/SG-60/refs/heads/main/3.jpg" alt="3">
+      <h3>Planning for Connectivity</h3>
+      <p>Towns are planned with a comprehensive transport infrastructure, including cycling, and pedestrian networks, for convenience and connectivity. Every block has access to a bus stop or MRT/ LRT station, which makes for easy travelling within the town and to the rest of Singapore.The town centre is typically also an integrated hub for public transportation, where the MRT station and bus interchange are located.</p>
+    </div>
+    <div class="image-box">
+      <img src="https://raw.githubusercontent.com/Prudhvinsk/SG-60/refs/heads/main/4.jpg" alt="4">
+      <h3>Checkerboard Concept</h3>
+      <p>Within each town, there is an interspersing of low-rise developments such as schools, parks and community buildings in between high-rise residential developments. This checkerboard concept guides our planning and helps to provide visual and spatial relief throughout the town for a pleasant living environment. Community facilities are also evenly distributed in the town for better accessibility for residents.</p>
+    </div>
+  </div>
+  </section>
+
+  <!-- GSAP animations -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+  <script>
+    gsap.registerPlugin(ScrollTrigger);
+    document.querySelectorAll('.segment').forEach(seg => {
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: seg,
+          start: 'top top',
+          end: 'bottom bottom',
+          scrub: true,
+          pin: true
+        }
+      });
+      tl.to(seg.querySelector('.titles'), { opacity: 0 }, 0.25)
+        .to(seg.querySelector('.image'), { opacity: 1, scale: 1, duration: 0.5 }, 0.5)
+        .to(seg.querySelector('.placeholder'), { opacity: 1, x: 0, duration: 0.5 }, 0.75);
+    });
+  </script>
+
+</body>
+</html>
