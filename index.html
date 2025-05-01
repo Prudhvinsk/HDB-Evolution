@@ -55,7 +55,7 @@
     }
     
     /* content segments */
-    .segment { position: relative; height: 150vh; z-index: 1; }
+    .segment { position: relative; height: 200vh; z-index: 1; }
     .mask {
       display: none;
     }
@@ -136,16 +136,86 @@
     .four-images .image-box p {
       font-size: .9rem; color: #333;
     }
+    
+    /* ── Fixed, full-screen map stack ── */
+    .maps-wrapper {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+    }
+    .map-layer {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+    }
+    .map-layer.map1 {
+      opacity: 1;  /* show first map by default */
+    }
+    .map-layer iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+    /* ensure your content sits above the maps */
+    section.segment,
+    section.intro {
+      position: relative;
+      z-index: 1;
+    }
   </style>
 </head>
 <body>
-
-  <!-- Background CARTO map embed -->
-  <div id="carto-map">
-    <iframe
-      src="https://thunbergii.app.carto.com/viewer/61bc62e6-6241-460e-bd48-d3db8b6542f0"
-      allowfullscreen>
-    </iframe>
+  <!-- → Fixed map-layers wrapper ← -->
+  <div class="maps-wrapper">
+    <div class="map-layer map1">
+      <iframe
+        src="https://thunbergii.app.carto.com/viewer/b3362f9a-c98c-40db-b081-1bd64d81ab17?zoom=12&scrollwheel=false"
+        allowfullscreen>
+      </iframe>
+    </div>
+    <div class="map-layer map2">
+      <iframe
+        src="https://thunbergii.app.carto.com/viewer/b4fc9d60-cac4-4347-9faf-4af692a587d2?zoom=12&scrollwheel=false"
+        allowfullscreen>
+      </iframe>
+    </div>
+    <div class="map-layer map3">
+      <iframe
+        src="https://thunbergii.app.carto.com/viewer/cecd3c51-8c13-4bea-851c-9582ef019eb9?zoom=12&scrollwheel=false"
+        allowfullscreen>
+      </iframe>
+    </div>
+    <div class="map-layer map4">
+      <iframe
+        src="https://thunbergii.app.carto.com/viewer/2db6b412-31a6-48a7-b1b7-38d3db60a7bf?zoom=12&scrollwheel=false"
+        allowfullscreen>
+      </iframe>
+    </div>
+    <div class="map-layer map5">
+      <iframe
+        src="https://thunbergii.app.carto.com/viewer/ee9fb450-b869-43de-baac-224103281eef?zoom=12&scrollwheel=false"
+        allowfullscreen>
+      </iframe>
+    </div>
+    <div class="map-layer map6">
+      <iframe
+        src="https://thunbergii.app.carto.com/viewer/96e8d70b-b0f3-490a-a27c-f1f37f3661a1?zoom=12&scrollwheel=false"
+        allowfullscreen>
+      </iframe>
+    </div>
+    <div class="map-layer map7">
+      <iframe
+        src="https://thunbergii.app.carto.com/viewer/33e37134-b806-45ff-b539-b2f2672fda8e?zoom=12&scrollwheel=false"
+        allowfullscreen>
+      </iframe>
+    </div>
+    <div class="map-layer map8">
+      <iframe
+        src="https://thunbergii.app.carto.com/viewer/61bc62e6-6241-460e-bd48-d3db8b6542f0?zoom=12&scrollwheel=false"
+        allowfullscreen>
+      </iframe>
+    </div>
   </div>
 
   <!-- 1) Intro screen -->
@@ -162,7 +232,7 @@
 
   <!-- 2) 1950s -->
   <section class="segment" id="seg-1950s">
-    
+
     <div class="titles">
       <h1>Pre-HDB: The Singapore Improvement Trust</h1>
       <h2>HDB’s Predecessor</h2>
@@ -345,21 +415,44 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
   <script>
     gsap.registerPlugin(ScrollTrigger);
-    document.querySelectorAll('.segment').forEach(seg => {
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: seg,
-          start: 'top top',
-          end: 'bottom bottom',
-          scrub: true,
-          pin: true
-        }
-      });
-      tl.to(seg.querySelector('.titles'), { opacity: 0 }, 0.25)
-        .to(seg.querySelector('.image'), { opacity: 1, scale: 1, duration: 0.5 }, 0.5)
-        .to(seg.querySelector('.placeholder'), { opacity: 1, x: 0, duration: 0.5 }, 0.75);
+  
+     // A) Content animations for each segment
+  document.querySelectorAll('.segment').forEach(seg => {
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: seg,
+        start:   'top top',
+        end:     'bottom bottom',
+        scrub:   true,
+        pin:     true
+      }
     });
-  </script>
+    tl.to(seg.querySelector('.titles'),      { opacity: 0 },            0.25)
+      .to(seg.querySelector('.image'),       { opacity: 1, scale: 1,   duration: 0.5 }, 0.5)
+      .to(seg.querySelector('.placeholder'), { opacity: 1, x: 0,       duration: 0.5 }, 0.75);
+  });
 
+  // B) Map‐layer (works both up & down)
+  const layers = gsap.utils.toArray('.map-layer');
+  const segs   = gsap.utils.toArray('.segment');
+
+  // helper to show only the active layer
+  function showOnly(active) {
+      layers.forEach((layer, i) => {
+        gsap.to(layer, { opacity: (i === active ? 1 : 0), duration: 0.0 });
+      });
+    }
+
+    // create one ScrollTrigger per segment
+    segs.forEach((seg, i) => {
+      ScrollTrigger.create({
+        trigger:     seg,
+        start:       'top top',
+        end:         'bottom top',
+        onEnter:     () => showOnly(i),
+        onEnterBack: () => showOnly(i)
+    });
+  });
+</script>
 </body>
 </html>
